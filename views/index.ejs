@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+  </head>
+  <body>
+    <header><div class="title">Notle</div></header>
+    <div class="container">
+
+      <div class="gameBoard">
+        <!-- Row 1 of 6-->
+        <div class="gameRow">
+          <div tile="1" class="tile"></div>
+          <div tile="2" class="tile"></div>
+          <div tile="3" class="tile"></div>
+          <div tile="4" class="tile"></div>
+          <div tile="5" class="tile"></div>
+        </div>
+      <!-- Row 2 of 6-->
+      <div class="gameRow">
+        <div tile="6" class="tile"></div>
+        <div tile="7" class="tile"></div>
+        <div tile="8" class="tile"></div>
+        <div tile="9" class="tile"></div>
+        <div tile="10" class="tile"></div>
+      </div>
+    <!-- Row 3 of 6-->
+    <div class="gameRow">
+      <div tile="11" class="tile"></div>
+      <div tile="12" class="tile"></div>
+      <div tile="13" class="tile"></div>
+      <div tile="14" class="tile"></div>
+      <div tile="15" class="tile"></div>
+    </div>
+    <!-- Row 4 of 6-->
+    <div class="gameRow">
+      <div tile="16" class="tile"></div>
+      <div tile="17" class="tile"></div>
+      <div tile="18" class="tile"></div>
+      <div tile="19" class="tile"></div>
+      <div tile="20" class="tile"></div>
+    </div>
+    <!-- Row 5 of 6-->
+    <div class="gameRow">
+      <div tile="21" class="tile"></div>
+      <div tile="22" class="tile"></div>
+      <div tile="23" class="tile"></div>
+      <div tile="24" class="tile"></div>
+      <div tile="25" class="tile"></div>
+    </div>
+    <!-- Row 6 of 6-->
+    <div class="gameRow">
+      <div tile="26" class="tile"></div>
+      <div tile="27" class="tile"></div>
+      <div tile="28" class="tile"></div>
+      <div tile="29" class="tile"></div>
+      <div tile="30" class="tile"></div>
+    </div>
+      </div>
+      <div class="playerBoard">
+        <div id="keyboard">
+          <div note="submit" class="white">&crarr;</div>
+          <div note="acc_toggle" class="black">&#9839;/&#9837;</div>
+          <div note="0" class="white">C</div>
+          <div note="1" class="black sharp ">C&#9839;</div>
+          <div note="1" class="black flat" style="display:none;">D&#9837;</div>
+          <div note="2" class="white">D</div>
+          <div note="3" class="black sharp">D&#9839;</div>
+          <div note="3" class="black flat" style="display:none;">E&#9837;</div>
+          <div note="4" class="white">E</div>
+          <div note="5" class="white">F</div>
+          <div note="6" class="black sharp">F&#9839;</div>
+          <div note="6" class="black flat" style="display:none;">G&#9837;</div>
+          <div note="7" class="white">G</div>
+          <div note="8" class="black sharp">G&#9839;</div>
+          <div note="8" class="black flat" style="display:none;">A&#9837;</div>
+          <div note="9" class="white">A</div>
+          <div note="10" class="black sharp">A&#9839;</div>
+          <div note="10" class="black flat" style="display:none;">B&#9837;</div>
+          <div note="11" class="white">B</div>
+          <div note="12" class="white">C</div>
+          <div note="13" class="black sharp">C&#9839;</div>
+          <div note="13" class="black flat" style="display:none;">D&#9837;</div>
+          <div note="14" class="white">D</div>
+          <div note="15" class="black sharp">D&#9839;</div>
+          <div note="15" class="black flat" style="display:none;">E&#9837;</div>
+          <div note="16" class="white">E</div>
+          <div note="delete" class="white">&#9003;</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- Scripts -->
+  <script src="javascripts/main.js"></script>
+</html>
