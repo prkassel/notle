@@ -56,6 +56,11 @@ header {
   grid-gap: 5px;
 }
 
+
+.tile:empty::before {
+  content: "\A0";
+}
+
 .tile {
   aspect-ratio: 1;
   position: relative;
@@ -121,6 +126,11 @@ header {
 
 #keyboard {
   margin-top: 80px;
+}
+
+.keys {
+  width: 95%;
+  margin: auto;;
 }
 
 .white, .black {
