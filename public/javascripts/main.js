@@ -80,7 +80,7 @@ function toggleKeyboard() {
 
     if (flatToggled) {
         Array.from(sharps).forEach(function(sharp) {
-            sharp.style.display = 'initial';
+            sharp.style.display = 'flex';
         });
         Array.from(flats).forEach(function(flat) {
             flat.style.display = 'none';
@@ -92,7 +92,7 @@ function toggleKeyboard() {
             sharp.style.display = 'none';
         });
         Array.from(flats).forEach(function(flat) {
-            flat.style.display = 'initial';
+            flat.style.display = 'flex';
         });
 
         flatToggled = true;

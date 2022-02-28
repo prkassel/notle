@@ -34,7 +34,7 @@ header {
 
 .container {
   margin: auto;
-  width:60%;
+  width:50%;
 }
 
 
@@ -116,7 +116,7 @@ header {
 }
 
 .playerBoard {
-  margin-top: 16px;
+  margin: 16px 8px;
 }
 
 .row {
@@ -126,12 +126,10 @@ header {
 
 .offset__half {
   flex: .5;
-  margin-right: 4px;
 }
 
 .offset {
   flex: 1;
-  margin-right: 4px;
 }
 
 .break {
@@ -153,6 +151,10 @@ header {
   flex: 1;
 }
 
+.special {
+  flex: 1.5
+}
+
 
 
 /* MEDIA QUERIES */
@@ -169,8 +171,7 @@ header {
   }
 
   .playerBoard {
-    width: 95%;
-    margin: 16px auto;
+    margin: 16px 4px;
   }
 
   .white, .black {
