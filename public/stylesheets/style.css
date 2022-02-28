@@ -34,7 +34,7 @@ header {
 
 .container {
   margin: auto;
-  width:50%;
+  width:60%;
 }
 
 
@@ -116,43 +116,43 @@ header {
 }
 
 .playerBoard {
-  width: 500px;
-  margin: auto;
+  margin-top: 16px;
+}
+
+.row {
+  display: flex;
+  margin: 5px 0;
+}
+
+.offset__half {
+  flex: .5;
+  margin-right: 4px;
 }
 
 .offset {
-  margin: 0 0 0 -1rem;
+  flex: 1;
+  margin-right: 4px;
 }
 
-
-#keyboard {
-  margin-top: 80px;
-}
-
-.keys {
-  width: 95%;
-  margin: auto;;
+.break {
+  flex-basis: 100%;
+  height: 0;
 }
 
 .white, .black {
   cursor: pointer;
-  float: left;
-  width: 30px;
   height: 60px;
   margin-right: 4px;
   background-color: #dfe6e9;
-  text-align: center;
+  justify-content: center;
   line-height: 60px;
   font-family: inherit;
   font-weight: bold;
   border-radius: 4px;
+  display: flex;
+  flex: 1;
 }
 
-.black {
-  margin-top: -64px;
-  margin-left: -16px;
-  margin-bottom: 2px;
-}
 
 
 /* MEDIA QUERIES */
@@ -170,7 +170,7 @@ header {
 
   .playerBoard {
     width: 95%;
-    margin: auto;
+    margin: 16px auto;
   }
 
   .white, .black {
