@@ -37,6 +37,41 @@ header {
   width:50%;
 }
 
+.musicPlayer {
+  margin-top: 20px;
+  display: flex;
+  height: 50px;
+}
+
+.musicPlayer__description {
+  display: flex;
+  flex: .75;
+  border: 1px solid red;
+  margin-right: 4px;
+  justify-content: center;
+}
+
+.musicPlayer__button {
+  flex: .25;
+  margin-left: 4px;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  stroke: black;
+}
+
+.disabled {
+  cursor: not-allowed;
+  border-color: #b2bec3;
+  fill: #b2bec3;
+  stroke: #b2bec3;
+}
+
+.musicPlayer__button svg {
+  display: block;
+  margin: 5px auto;
+  height: 40px;
+}
 
 .gameBoard {
   width: 250px;

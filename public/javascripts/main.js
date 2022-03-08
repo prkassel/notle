@@ -2,19 +2,15 @@ let tileCount = 0;
 let playerTurn = 0;
 let flatToggled = false;
 let keyboardDisabled = false;
+let playerDisabled = false;
+let gameOver = false;
 
 let currentGuess = [];
 
 const todaysMelody = {
     "answer": [0,0,7,7,9],
-    "revealMelody": []
+    "revealMelody": [0,0,7,7,9,9,7,-100,5,5,4,4,2,2,0]
 };
-
-
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var volume = audioCtx.createGain();
-volume.connect(audioCtx.destination);
-
 
 const A_440 = 440;
 const notesList = [
@@ -31,6 +27,15 @@ const notesList = [
     ["A&#9839;", "B&#9837;"],
     ["B"]
 ]
+
+
+document.getElementById('musicPlayer').addEventListener('click', function(e) {
+     if (playerDisabled !== true) {
+        playSequence(todaysMelody.answer);
+        document.getElementById('musicPlayer').classList.add('disabled');
+     }
+});
+
 
 
 document.getElementById('keyboard').addEventListener('mousedown', function(e) {
@@ -60,6 +65,7 @@ function playerGuess() {
     keyboardDisabled = false;
     let results = checkAnswer(currentGuess);
 
+
     for (i = 0; i < results[1].length; i++) {
         let loc = (tileCount - 4) + i;
         console.log(loc)
@@ -67,11 +73,20 @@ function playerGuess() {
         console.log(guessTile);
         guessTile.classList.add(results[1][i]);
     }
-    
 
-    // last thing is delete the current guesses
-    currentGuess = [];
+    if (!results[0]) {
+        playSequence(currentGuess);
+        // last thing is delete the current guesses and turn the player on
+        currentGuess = [];
+        playerDisabled = false;
+        document.getElementById('musicPlayer').classList.remove('disabled');
+    }
+    else {
+        playSequence(todaysMelody.revealMelody);
+        winner();
+    }
 }
+
 
 function toggleKeyboard() {
 
@@ -103,12 +118,6 @@ function toggleKeyboard() {
 function playerSelect(playerSelection) {
 
     let noteNames = playerSelection >= 12? notesList[playerSelection - 12]: notesList[playerSelection];
-
-    frequency = convertIntervalToFrequency(playerSelection);
-   
-    // play the tone they selected
-    playPlayerSelection(frequency)
-
     tileCount += 1;
 
     let currentTile = document.querySelector(`[tile="${tileCount}"]`);
@@ -144,27 +153,6 @@ function convertIntervalToFrequency(interval) {
 }
 
 
-function playPlayerSelection(frequency) {
-    
-
-// create Oscillator node
-    var oscillator = audioCtx.createOscillator();
-
-    oscillator.type = 'sine';
-    oscillator.frequency.value = frequency; // value in hertz
-    oscillator.connect(audioCtx.destination);
-    oscillator.connect(volume);
-    volume.gain.value=0.000005;
-    oscillator.start();
-    
-
-    function delay(time) {
-        return new Promise(resolve => setTimeout(resolve, time));
-      }
-      
-      delay(1000).then(() => oscillator.stop());
-}
-
 function checkAnswer(guesses) {
     // 1 = right note right location
     // 2 = right note wrong location
@@ -187,4 +175,8 @@ function checkAnswer(guesses) {
 }
 
 
-// right note, but wrong place OR wrong octave
+function winner() {
+    document.getElementById('myModal').style.display = 'initial';
+}
+
+
