@@ -1,3 +1,5 @@
+let hasPlayed = localStorage.getItem('hasPlayed');
+
 let tileCount = 0;
 let playerTurn = 0;
 let flatToggled = false;
@@ -8,25 +10,30 @@ let gameOver = false;
 let currentGuess = [];
 
 const todaysMelody = {
-    "answer": [0,0,7,7,9],
-    "revealMelody": [0,0,7,7,9,9,7,-100,5,5,4,4,2,2,0]
+    "answer": [6,6,7,9,9],
+    "revealMelody": [6,6,7,9,9,7,6,4,2,2,4,6,6,-100,4]
 };
 
-const A_440 = 440;
-const notesList = [
-    ["C"],
-    ["C&#9839;", "D&#9837;"],
-    ["D"],
-    ["D&#9839;", "E&#9837;"],
-    ["E"],
-    ["F"],
-    ["F&#9839;", "G&#9837;"],
-    ["G"],
-    ["G&#9839;", "A&#9837;"],
-    ["A"],
-    ["A&#9839;", "B&#9837;"],
-    ["B"]
-]
+
+if (!hasPlayed) {
+    document.getElementById('introModal').style.display = 'initial';
+}
+
+document.querySelectorAll('.close').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        console.log(e);
+        if (e.target.attributes.id.nodeValue === 'closeIntro') {
+            document.getElementById('introModal').style.display = 'none';
+            localStorage.setItem('hasPlayed', true);
+        }
+        else if (e.target.attributes.id.nodeValue === 'closeSuccess') {
+            document.getElementById('successModal').style.display = 'none';
+        }
+    });
+});
+
+
+
 
 
 document.getElementById('musicPlayer').addEventListener('click', function(e) {
@@ -46,7 +53,8 @@ document.getElementById('keyboard').addEventListener('mousedown', function(e) {
     }
 
     else if (playerSelection == 'delete') {
-        if (tileCount > 0 && tileCount % 5 > 0) {
+        console.log(tileCount, playerTurn * 5);
+        if (tileCount > 0 && tileCount > playerTurn * 5) {
             deleteLastSelection();
         }
     }
@@ -68,9 +76,7 @@ function playerGuess() {
 
     for (i = 0; i < results[1].length; i++) {
         let loc = (tileCount - 4) + i;
-        console.log(loc)
         let guessTile = document.querySelector(`[tile="${loc}"]`);
-        console.log(guessTile);
         guessTile.classList.add(results[1][i]);
     }
 
@@ -84,6 +90,8 @@ function playerGuess() {
     else {
         playSequence(todaysMelody.revealMelody);
         winner();
+        keyboardDisabled = true;
+        playerDisabled = true;
     }
 }
 
@@ -176,7 +184,7 @@ function checkAnswer(guesses) {
 
 
 function winner() {
-    document.getElementById('myModal').style.display = 'initial';
+    document.getElementById('successModal').style.display = 'initial';
 }
 
 

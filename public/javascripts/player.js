@@ -1,3 +1,20 @@
+const A_440 = 440;
+const notesList = [
+    ["C"],
+    ["C&#9839;", "D&#9837;"],
+    ["D"],
+    ["D&#9839;", "E&#9837;"],
+    ["E"],
+    ["F"],
+    ["F&#9839;", "G&#9837;"],
+    ["G"],
+    ["G&#9839;", "A&#9837;"],
+    ["A"],
+    ["A&#9839;", "B&#9837;"],
+    ["B"]
+]
+
+
 function convertIntervalsToSeq(intervals) {
     let seqArray = [];
     for (i = 0; i < intervals.length; i++) {
@@ -10,7 +27,6 @@ function convertIntervalsToSeq(intervals) {
 function playSequence(intervals) {
 
     if (Tone.context.state !== 'running') {
-        console.log('starting player');
         Tone.context.resume();
     }
 
@@ -18,7 +34,6 @@ function playSequence(intervals) {
     const now = Tone.now()
 
     intervals = convertIntervalsToSeq(intervals);
-    console.log(intervals);
 
     for (i = 0; i < intervals.length; i++) {
         if (i == 0) {

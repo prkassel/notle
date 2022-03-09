@@ -10,8 +10,7 @@
     <header><div class="title">Notle</div></header>
     <div class="container">
       <div class="musicPlayer">
-        <div class="musicPlayer__description">
-          <p>You get one listen per try</p>
+        <div class="musicPlayer__leftSpan">
         </div>
         <div id="musicPlayer" class="musicPlayer__button">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -91,7 +90,7 @@
           <div class="break"></div>
           <div class="row">
             <div class="offset__half"></div>
-            <div note="submit" class="white special">&crarr;</div>
+            <div note="submit" class="white special">ENTER</div>
             <div note="0" class="white">C</div>
             <div note="2" class="white">D</div>
             <div note="4" class="white">E</div>
@@ -100,21 +99,41 @@
             <div note="9" class="white">A</div>
             <div note="11" class="white">B</div>
             <div note="12" class="white">C</div>
-           <div note="delete" class="white special">&#9003;</div>
+           <div note="delete" class="white special">DEL</div>
            <div class="offset__half"></div>
           </div>
         </div>
       </div>
     </div>
-    <div id="myModal" class="modal">
+    <div id="introModal" class="modal">
 
       <!-- Modal content -->
       <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>You won!</p>
+        <span id="closeIntro" class="close">&times;</span>
+        <h4>HOW TO PLAY</h4>
+        <p>Guess the <strong>NOTLE</strong> in six tries.</p>
+        <p>Before each try, you can listen to melody by pushing the
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="smallIcon">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </span> &nbsp;button.
+        </p>
+        <p>When you're ready to submit your answer, hit the ENTER button and you'll be able to hear your guess.</p>
+        <p>After each guess, the color of the tiles will change to show how close your guess was to the melody.</p>
+        <p><em>Not able to hear the audio? Make sure your device isn't muted and that the volume is turned up!</em></p>
       </div>
-    
     </div>
+
+    <div id="successModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span id="closeSuccess" class="close">&times;</span>
+        <h4>YOU GOT IT!</h4>
+      </div>
+    </div>
+
   </body>
   <!-- Scripts -->
   <script src="javascripts/tone.js"></script>

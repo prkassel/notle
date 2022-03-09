@@ -43,21 +43,28 @@ header {
   height: 50px;
 }
 
-.musicPlayer__description {
+.musicPlayer__leftSpan {
   display: flex;
   flex: .75;
-  border: 1px solid red;
-  margin-right: 4px;
-  justify-content: center;
 }
 
 .musicPlayer__button {
-  flex: .25;
+  flex: .15;
   margin-left: 4px;
   border: 1px solid black;
   color: black;
   cursor: pointer;
   stroke: black;
+}
+
+.icon {
+  border: 1px solid black;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.smallIcon {
+  vertical-align: top;
 }
 
 .disabled {
