@@ -1,4 +1,3 @@
-let hasPlayed = localStorage.getItem('hasPlayed');
 
 let tileCount = 0;
 let playerTurn = 0;
@@ -6,13 +5,18 @@ let flatToggled = false;
 let keyboardDisabled = false;
 let playerDisabled = false;
 let gameOver = false;
-
 let currentGuess = [];
 
-const todaysMelody = {
-    "answer": [6,6,7,9,9],
-    "revealMelody": [6,6,7,9,9,7,6,4,2,2,4,6,6,-100,4]
-};
+let hasPlayed = localStorage.getItem('hasPlayed');
+let correctlyAnswered = JSON.parse(localStorage.getItem('correctlyAnswered'));
+
+if (!correctlyAnswered) correctlyAnswered = [];
+
+let todaysMelody;
+
+fetch(encodeURI('./answers/' + JSON.stringify(correctlyAnswered)))
+  .then(response => response.json())
+  .then(data => todaysMelody = data);
 
 
 if (!hasPlayed) {
@@ -184,6 +188,8 @@ function checkAnswer(guesses) {
 
 
 function winner() {
+    correctlyAnswered.push(todaysMelody.id);
+    localStorage.setItem('correctlyAnswered', JSON.stringify(correctlyAnswered));
     document.getElementById('successModal').style.display = 'initial';
 }
 
