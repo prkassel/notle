@@ -1,22 +1,27 @@
-
 let tileCount = 0;
 let playerTurn = 0;
 let flatToggled = false;
 let keyboardDisabled = false;
 let playerDisabled = false;
-let gameOver = false;
+
 let currentGuess = [];
 
 let hasPlayed = localStorage.getItem('hasPlayed');
-let correctlyAnswered = JSON.parse(localStorage.getItem('correctlyAnswered'));
+let answered = JSON.parse(localStorage.getItem('answered'));
 
-if (!correctlyAnswered) correctlyAnswered = [];
+if (!answered) answered = [];
 
 let todaysMelody;
 
-fetch(encodeURI('./answers/' + JSON.stringify(correctlyAnswered)))
+fetch(encodeURI('./answers/' + JSON.stringify(answered)))
   .then(response => response.json())
-  .then(data => todaysMelody = data);
+  .then(data => {
+      todaysMelody = data;
+      if (!todaysMelody ) {
+        endGame();
+    }
+});
+
 
 
 if (!hasPlayed) {
@@ -30,8 +35,8 @@ document.querySelectorAll('.close').forEach(function(item) {
             document.getElementById('introModal').style.display = 'none';
             localStorage.setItem('hasPlayed', true);
         }
-        else if (e.target.attributes.id.nodeValue === 'closeSuccess') {
-            document.getElementById('successModal').style.display = 'none';
+        else if (e.target.attributes.id.nodeValue === 'closeGameEndModal') {
+            document.getElementById('gameEndModal').style.display = 'none';
         }
     });
 });
@@ -57,7 +62,6 @@ document.getElementById('keyboard').addEventListener('mousedown', function(e) {
     }
 
     else if (playerSelection == 'delete') {
-        console.log(tileCount, playerTurn * 5);
         if (tileCount > 0 && tileCount > playerTurn * 5) {
             deleteLastSelection();
         }
@@ -69,6 +73,10 @@ document.getElementById('keyboard').addEventListener('mousedown', function(e) {
     else if (!keyboardDisabled) {
         playerSelect(playerSelection);
     }
+});
+
+document.getElementById("playAgain").addEventListener('click', function(e) {
+    location.reload();
 });
 
 
@@ -90,12 +98,14 @@ function playerGuess() {
         currentGuess = [];
         playerDisabled = false;
         document.getElementById('musicPlayer').classList.remove('disabled');
+
+        if (playerTurn === 6) {
+            endGame(false);
+        }
     }
     else {
         playSequence(todaysMelody.revealMelody);
-        winner();
-        keyboardDisabled = true;
-        playerDisabled = true;
+        endGame(true);
     }
 }
 
@@ -187,10 +197,30 @@ function checkAnswer(guesses) {
 }
 
 
-function winner() {
-    correctlyAnswered.push(todaysMelody.id);
-    localStorage.setItem('correctlyAnswered', JSON.stringify(correctlyAnswered));
-    document.getElementById('successModal').style.display = 'initial';
+function endGame(result) {
+    keyboardDisabled = true;
+    playerDisabled = true;
+    document.getElementById('gameEndModal').style.display = 'inline-block';
+    
+    if (result !== undefined) {
+        
+        answered.push({"id": todaysMelody.id, "answered": result});
+        localStorage.setItem('answered', JSON.stringify(answered));
+        message = result? 'YOU GOT IT!' : 'Better luck next time...';
+
+        document.getElementById('gameOverMessage').innerHTML = message;
+        document.getElementById('winRateText').innerHTML = calculateWinRate();
+    }
+    else {
+        document.getElementById('gameOverMessage').innerHTML = "There aren't any more melodies to guess.";
+        document.getElementById('winRateText').innerHTML = "Check back later for more Notle fun!";
+        document.getElementById('playAgain').style.display = 'none';
+    }
 }
 
-
+function calculateWinRate() {
+    let right = answered.filter(answer => answer.answered === true).length;
+    let wrong = answered.filter(answer => answer.answered === false).length;
+    let winRateMessage = `Number correct: ${right}, Incorrect: ${wrong}, Win Rate: ${Math.round((right / answered.length) * 100, 2)}%`;
+    return winRateMessage;
+}

@@ -105,9 +105,9 @@
         </div>
       </div>
     </div>
-    <div id="introModal" class="modal">
 
-      <!-- Modal content -->
+    <!--- INTRO MODAL -->
+    <div id="introModal" class="modal">
       <div class="modal-content">
         <span id="closeIntro" class="close">&times;</span>
         <h4>HOW TO PLAY</h4>
@@ -125,12 +125,13 @@
       </div>
     </div>
 
-    <div id="successModal" class="modal">
-
-      <!-- Modal content -->
+    <!-- GAME END MODAL -->
+    <div id="gameEndModal" class="modal">
       <div class="modal-content">
-        <span id="closeSuccess" class="close">&times;</span>
-        <h4>YOU GOT IT!</h4>
+        <span id="closeGameEndModal" class="close">&times;</span>
+        <h4 id="gameOverMessage"></h4>
+        <p id="winRateText"></p>
+        <button class="submitButton" id="playAgain">Play Again</button>
       </div>
     </div>
 

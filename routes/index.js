@@ -6,26 +6,25 @@ var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Notle' });
 });
 
 
-router.get('/answers/:answered', function(req, res) {
+router.get('/answers/:guesses', function(req, res) {
 
-  let correctlyAnswered = JSON.parse(req.params.answered);
+  let guesses = JSON.parse(req.params.guesses).map(obj => obj.id);
   let answersData = JSON.parse(fs.readFileSync('files/answers.json')).melodies;
-  
   let answerKeys = answersData.map(obj => obj.id);
-  console.log(answerKeys);
-
-  let remainingKeys = answerKeys.filter(key => !correctlyAnswered.includes(key));
-  
-  console.log(remainingKeys);
+  let remainingKeys = answerKeys.filter(key => !guesses.includes(key));
   let randomRemainingKey = remainingKeys[Math.floor(Math.random()*remainingKeys.length)]
   console.log(randomRemainingKey);
-
-
-  res.json(answersData.find(item => item.id === randomRemainingKey));
+  if (randomRemainingKey > -1) {
+    console.log(answersData.find(item => item.id === randomRemainingKey));
+    res.json(answersData.find(item => item.id === randomRemainingKey));
+  }
+  else {
+    res.json(false);
+  }
 });
 
 module.exports = router;
